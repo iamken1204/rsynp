@@ -1,16 +1,16 @@
 #! /usr/bin/php -d magic_quotes_gpc='off' -f
 <?php
 ob_implicit_flush();
-$rsyncConfig = require(dirname(__FILE__) . '/rsync_config.php');
+$rsyncConfig = require(dirname(__FILE__) . '/rsynp_config.php');
 $dir = trim(shell_exec("pwd -LP"));
 $file = $argv[1];
 
 if (strlen(trim($file)) == 0) {
-    die("Please give parameter input.");
+    die("Please give parameter input.\n");
 }
 $this_file = $dir . "/" . $file;
 if (!is_file($this_file) && !is_dir($this_file)) {
-    die("This is not a file or directory.");
+    die("This is not a file or directory.\n");
 }
 if (
     preg_match("/\.php$/i", $file) &&
@@ -19,19 +19,21 @@ if (
         shell_exec("/usr/bin/php -d magic_quotes_gpc='off' -l" . $this_file)
     )
    ) {
-    die($this_file . " systax error!");
+    die($this_file . " systax error!\n");
 }
 if (is_link($this_file)) {
-    die("This is a symbolic link.");
+    die("This is a symbolic link.\n");
 }
 
+$hostPath = empty($rsyncConfig['hostPath']) ? $dir : $rsyncConfig['hostPath'];
+$hostPath .= '/';
 foreach ($rsyncConfig['serverList'] as $server) {
     $cmd = sprintf(
         "rsync -rlptoDv --delete %s %s@%s:%s",
         $file,
         $rsyncConfig['hostName'],
         $server,
-        $dir . "/"
+        $hostPath
     );
     echo $cmd . "\r\n";
     echo shell_exec($cmd) . "\r\n";
