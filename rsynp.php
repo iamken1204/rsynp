@@ -28,7 +28,6 @@ if (is_link($this_file)) {
 $hostPath = empty($rsyncConfig['hostPath']) ? $dir : $rsyncConfig['hostPath'];
 $hostPath .= '/';
 $excludeCmd = "--exclude-from '" . $rsyncConfig['rsynpPath'] . "/exclude.txt'";
-echo $excludeCmd;exit;
 foreach ($rsyncConfig['serverList'] as $server) {
     $cmd = sprintf(
         "rsync -rlptoDv --delete %s %s %s@%s:%s",
