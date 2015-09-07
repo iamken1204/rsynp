@@ -4,6 +4,7 @@
 // e.g. you are in path /home/www/some.kind.site/,
 // then rsynp will rsync your files to remote:/home/www/some.kind/site/
 return [
+    'rsynpPath' => '/home/username/rsynp',
     'hostName' => 'www-data',
     'hostPath' => '',
     'serverList' => [
