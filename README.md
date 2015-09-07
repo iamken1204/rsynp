@@ -16,6 +16,11 @@ $ git clone https://github.com/iamken1204/rsynp.git
 $ vim ~/rsynp/rsynp_config.php
 ```
 
+* (optional) add files or folders you want to ignore
+```shell
+$ vim ~/rsynp/exclude.txt
+```
+
 * synchronize
 ```shell
 # In your project directory.
