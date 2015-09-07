@@ -11,7 +11,7 @@ $ cd ~
 $ git clone https://github.com/iamken1204/rsynp.git
 ```
 
-* refined your rsync config
+* set your rsync config
 ```shell
 $ vim ~/rsynp/rsynp_config.php
 ```
